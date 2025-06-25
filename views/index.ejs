@@ -1,104 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Location Tracker</title>
-  <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
-          crossorigin=""
-          referrerpolicy="no-referrer"
-  />
+  <title>Suivi GPS</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
   <style>
-    #map { height: 500px; width: 100%; display: none; }
-    #status { margin-top: 20px; font-family: Arial, sans-serif; }
+    #map { height: 100vh; }
   </style>
 </head>
 <body>
-<h1>Location Tracker</h1>
 <div id="map"></div>
-<div id="status"></div>
 
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
-        crossorigin=""
-        referrerpolicy="no-referrer"
-></script>
-
+<!-- Injection de la variable depuis Node -->
 <script>
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  const statusDiv = document.getElementById("status");
-
-  if (isMobile && navigator.geolocation) {
-    statusDiv.textContent = "Mode téléphone détecté : envoi de la position GPS...";
-    // Fonction pour envoyer la position
-    function sendPosition(position) {
-      const { latitude, longitude } = position.coords;
-      fetch("/api/location", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ latitude, longitude }),
-      }).catch((err) => {
-        console.error("Erreur envoi position :", err);
-        statusDiv.textContent = "Erreur lors de l’envoi de la position.";
-      });
-    }
-
-    navigator.geolocation.watchPosition(
-            (pos) => {
-              sendPosition(pos);
-              statusDiv.textContent = `Position envoyée : ${pos.coords.latitude.toFixed(
-                      5
-              )}, ${pos.coords.longitude.toFixed(5)}`;
-            },
-            (err) => {
-              statusDiv.textContent = "Erreur géolocalisation : " + err.message;
-            },
-            {
-              enableHighAccuracy: true,
-              maximumAge: 0,
-              timeout: 5000,
-            }
-    );
-  } else {
-    // Mode ordinateur : affichage carte avec polling
-    statusDiv.textContent = "Mode ordinateur détecté : affichage de la carte.";
-
-    document.getElementById("map").style.display = "block";
-
-    const map = L.map("map").setView([0, 0], 2);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-    }).addTo(map);
-
-    let marker = null;
-
-    function updateLocation() {
-      fetch("/api/location")
-              .then((res) => res.json())
-              .then((data) => {
-                if (!data || !data.latitude || !data.longitude) return;
-                const { latitude, longitude } = data;
-                if (marker) {
-                  marker.setLatLng([latitude, longitude]);
-                } else {
-                  marker = L.marker([latitude, longitude]).addTo(map);
-                }
-                map.setView([latitude, longitude], 15);
-                statusDiv.textContent = `Dernière position : ${latitude.toFixed(
-                        5
-                )}, ${longitude.toFixed(5)}`;
-              })
-              .catch((err) => {
-                console.error("Erreur récupération position :", err);
-                statusDiv.textContent = "Erreur récupération position.";
-              });
-    }
-
-    setInterval(updateLocation, 3000);
-    updateLocation();
-  }
+  const destinationAddress = <%- JSON.stringify(destinationAddress) %>;
 </script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+<script src="/javascripts/script.js"></script>
 </body>
 </html>
