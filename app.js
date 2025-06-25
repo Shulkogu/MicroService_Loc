@@ -39,8 +39,36 @@ app.get("/api/location", (req, res) => {
     );
 });
 
+// Variable pour stocker la destination (en mémoire)
+let currentDestination = null;
+
+// API pour enregistrer la destination
+app.post("/api/destination", (req, res) => {
+    const { latitude, longitude } = req.body;
+    if (
+        typeof latitude !== "number" ||
+        typeof longitude !== "number" ||
+        isNaN(latitude) ||
+        isNaN(longitude)
+    ) {
+        return res.status(400).send("Invalid latitude or longitude");
+    }
+    currentDestination = { latitude, longitude };
+    res.sendStatus(200);
+});
+
+// API pour récupérer la destination
+app.get("/api/destination", (req, res) => {
+    if (!currentDestination) {
+        return res.json({});
+    }
+    res.json(currentDestination);
+});
+
 app.get("/", (req, res) => {
-    res.render("index");
+    // On récupère le user-agent pour la vue
+    const userAgent = req.headers["user-agent"] || "";
+    res.render("index", { userAgent });
 });
 
 const PORT = 3000;
