@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9931d778-c016-4894-9582-98a154399816" name="Changes" comment="">
+    <list default="true" id="9931d778-c016-4894-9582-98a154399816" name="Changes" comment="add destination management APIs and update map interaction for mobile and desktop">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locations.db" beforeDir="false" afterPath="$PROJECT_DIR$/locations.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +24,7 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -102,7 +101,17 @@
       <workItem from="1750777332140" duration="821000" />
       <workItem from="1750778287130" duration="1575000" />
       <workItem from="1750833403171" duration="3469000" />
+      <workItem from="1750880908146" duration="41000" />
     </task>
+    <task id="LOCAL-00001" summary="add destination management APIs and update map interaction for mobile and desktop">
+      <option name="closed" value="true" />
+      <created>1750865259815</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750865259815</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,5 +127,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add destination management APIs and update map interaction for mobile and desktop" />
+    <option name="LAST_COMMIT_MESSAGE" value="add destination management APIs and update map interaction for mobile and desktop" />
   </component>
 </project>
